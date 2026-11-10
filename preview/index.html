@@ -462,8 +462,20 @@ jobs:
           channel-duration: 4     # seconds per channel</pre>
   </div>
 
-  <p style="max-width: 1100px; margin: 1.5rem auto 0.75rem; font-size: 0.95rem; color: var(--text);">
-    <strong>Step 2:</strong> Embed the animated SVG in your <code>README.md</code>:
+  <p style="max-width: 1100px; margin: 1.5rem auto 0.5rem; font-size: 0.95rem; color: var(--text);">
+    <strong>Step 2:</strong> Trigger the workflow once manually in GitHub Actions:
+  </p>
+  <div style="max-width: 1100px; margin: 0 auto 1.5rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; font-size: 0.9rem; line-height: 1.6; color: var(--text);">
+    <ol style="margin-left: 1.25rem;">
+      <li>Navigate to the <strong>Actions</strong> tab in your repository.</li>
+      <li>In the left sidebar, click on <strong>CathodeRayStats</strong>.</li>
+      <li>Click the <strong>Run workflow</strong> dropdown button on the right and select <strong>Run workflow</strong>.</li>
+      <li>Wait ~30 seconds for the action to complete and commit <code>dist/retro-tv.svg</code> to your repo.</li>
+    </ol>
+  </div>
+
+  <p style="max-width: 1100px; margin: 0 auto 0.75rem; font-size: 0.95rem; color: var(--text);">
+    <strong>Step 3:</strong> Embed the animated SVG in your <code>README.md</code>:
   </p>
   <div class="code-container">
     <div class="code-header">

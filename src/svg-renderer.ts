@@ -700,10 +700,10 @@ export function renderRetroTvSvg(stats: UserStats, config: ThemeConfig): string 
           <circle cx="0" cy="0" r="22" fill="url(#metallic-dial)" stroke="#111827" stroke-width="1.5" />
           <circle cx="0" cy="0" r="21" fill="none" stroke="${tv.bezelLight}" stroke-width="0.8" opacity="0.4" />
           ${knobType === 'dot' ? `
-          <circle cx="0" cy="-14" r="3" fill="#E5E7EB" />
+          <circle cx="0" cy="-14" r="3" fill="${screen.bright}" />
           <circle cx="0" cy="-14" r="1.5" fill="#FFFFFF" />
           ` : `
-          <line x1="0" y1="-5" x2="0" y2="-18" stroke="#E5E7EB" stroke-width="2.5" stroke-linecap="round" />
+          <line x1="0" y1="-5" x2="0" y2="-18" stroke="${screen.bright}" stroke-width="3" stroke-linecap="round" />
           `}
           <circle cx="0" cy="0" r="4" fill="#1F2937" stroke="#374151" stroke-width="1" />
         </g>

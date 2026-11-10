@@ -32,7 +32,7 @@ The television cycles through four retro channels (default 4 seconds per channel
 
 ---
 
-## Quick Start (2-Step Setup)
+## Quick Start (3-Step Setup)
 
 ### Step 1: Create the GitHub Workflow
 
@@ -66,9 +66,18 @@ jobs:
           show-antennas: false    # Set to true for rabbit-ear antennas
 ```
 
-### Step 2: Embed the SVG in your README
+### Step 2: Run the Workflow Once
 
-Add this anywhere in your `README.md`:
+Before embedding the image into your profile, manually trigger the workflow once to generate the initial SVG:
+
+1. In your GitHub repository, click on the **Actions** tab.
+2. In the left sidebar under *All workflows*, select **CathodeRayStats**.
+3. Click the **Run workflow** dropdown on the right, keep the branch as `main`, and click **Run workflow**.
+4. Once the job completes (~30 seconds), GitHub Actions will commit `dist/retro-tv.svg` directly to your repository.
+
+### Step 3: Embed the SVG in your README
+
+Add this snippet anywhere in your `README.md`:
 
 ```markdown
 <p align="center">
@@ -76,7 +85,7 @@ Add this anywhere in your `README.md`:
 </p>
 ```
 
-GitHub Actions will automatically fetch your live stats, render the animated TV SVG, and commit `dist/retro-tv.svg` back into your repo.
+From here on, GitHub Actions will automatically refresh your live stats every 6 hours and push updates to `dist/retro-tv.svg`.
 
 ---
 
