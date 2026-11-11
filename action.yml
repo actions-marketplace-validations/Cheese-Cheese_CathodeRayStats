@@ -75,7 +75,7 @@ runs:
       with:
         node-version: '20'
 
-    - name: Generate Retro TV SVG
+    - name: Generate CathodeRayStats SVG
       shell: bash
       env:
         INPUT_USERNAME: ${{ inputs.username }}

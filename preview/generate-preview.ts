@@ -4,6 +4,182 @@ import { createMockStats } from '../src/github-api';
 import { renderRetroTvSvg } from '../src/svg-renderer';
 import { resolveScreenPalette, resolveTVPalette } from '../src/themes';
 import { ThemeConfig } from '../src/types';
+import { VT323_FONT_BASE64 } from '../src/font-base64';
+
+export function createLogoSvg(): string {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'VT323';
+        font-style: normal;
+        font-weight: 400;
+        src: url(data:font/woff2;base64,${VT323_FONT_BASE64}) format('woff2');
+      }
+      .crs-pixel {
+        font-family: 'VT323', monospace;
+      }
+    </style>
+
+    <linearGradient id="logo-knob-rim" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4B5563" />
+      <stop offset="50%" stop-color="#1F2937" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+
+    <radialGradient id="logo-metallic-dial" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#374151" />
+      <stop offset="70%" stop-color="#1F2937" />
+      <stop offset="100%" stop-color="#111827" />
+    </radialGradient>
+
+    <radialGradient id="logo-bezel-shadow" cx="50%" cy="50%" r="55%">
+      <stop offset="70%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="95%" stop-color="#000000" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.85" />
+    </radialGradient>
+
+    <filter id="logo-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <clipPath id="logo-cabinet-clip">
+      <rect x="0" y="0" width="800" height="500" rx="30" />
+    </clipPath>
+
+    <clipPath id="logo-screen-clip">
+      <rect x="36" y="26" width="536" height="448" rx="14" />
+    </clipPath>
+
+    <pattern id="logo-scanlines" width="100" height="4" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="100" y2="0" stroke="#000000" stroke-width="1.2" opacity="0.35" />
+    </pattern>
+  </defs>
+
+  <rect x="0" y="0" width="800" height="500" rx="30" fill="#26292E" />
+
+  <g clip-path="url(#logo-cabinet-clip)">
+    <path d="M 0 0 L 800 0 L 788 12 L 12 12 L 12 488 L 0 500 Z" fill="#3A3F47" opacity="0.45" />
+    <path d="M 800 0 L 800 500 L 0 500 L 12 488 L 788 488 L 788 12 Z" fill="#15171A" opacity="0.65" />
+  </g>
+
+  <rect x="0" y="0" width="800" height="500" rx="30" fill="none" stroke="#15171A" stroke-width="4" />
+  <rect x="30" y="20" width="548" height="460" rx="18" fill="#15171A" stroke="#3A3F47" stroke-width="1.5" />
+
+  <g clip-path="url(#logo-screen-clip)">
+    <rect x="36" y="26" width="536" height="448" rx="14" fill="#0A0E14" />
+    <rect x="36" y="26" width="536" height="448" fill="url(#logo-scanlines)" pointer-events="none" />
+    <rect x="36" y="26" width="536" height="448" rx="14" fill="url(#logo-bezel-shadow)" pointer-events="none" />
+    <path d="M 40 30 Q 300 45 560 30 L 540 180 Q 280 200 40 120 Z" fill="#FFFFFF" opacity="0.03" pointer-events="none" />
+
+    <text x="56" y="62" class="crs-pixel" fill="#94A3B8" font-size="18" letter-spacing="2">CH 01  NTSC-U  [4:3 CRT]</text>
+    <text x="552" y="62" class="crs-pixel" fill="#94A3B8" font-size="18" text-anchor="end" letter-spacing="1">STEREO REC</text>
+    <circle cx="456" cy="56" r="4" fill="#EF4444" />
+
+    <text x="304" y="275" class="crs-pixel" fill="#FFFFFF" font-size="205" font-weight="bold" text-anchor="middle" letter-spacing="14" filter="url(#logo-glow)">CRS</text>
+    <text x="304" y="340" class="crs-pixel" fill="#E2E8F0" font-size="26" font-weight="bold" text-anchor="middle" letter-spacing="7">CATHODE RAY STATS</text>
+    <text x="304" y="375" class="crs-pixel" fill="#94A3B8" font-size="18" text-anchor="middle" letter-spacing="3">RETRO CRT TELEVISION WIDGET ENGINE</text>
+
+    <line x1="56" y1="420" x2="552" y2="420" stroke="#94A3B8" stroke-width="1" stroke-opacity="0.3" stroke-dasharray="4 4" />
+    <text x="56" y="445" class="crs-pixel" fill="#94A3B8" font-size="16" letter-spacing="1">INPUT: GITHUB API</text>
+    <text x="304" y="445" class="crs-pixel" fill="#94A3B8" font-size="16" text-anchor="middle" letter-spacing="2">100% PURE SVG</text>
+    <text x="552" y="445" class="crs-pixel" fill="#94A3B8" font-size="16" text-anchor="end" letter-spacing="1">ZERO RUNTIME</text>
+  </g>
+
+  <rect x="36" y="26" width="536" height="448" rx="14" fill="none" stroke="#15171A" stroke-width="3" pointer-events="none" />
+
+  <g id="logo-control-panel">
+    <line x1="592" y1="26" x2="592" y2="474" stroke="#15171A" stroke-width="2.5" />
+    <line x1="594" y1="26" x2="594" y2="474" stroke="#3A3F47" stroke-width="1" stroke-opacity="0.3" />
+
+    <g id="logo-knob-ch">
+      <circle cx="684" cy="98" r="38" fill="url(#logo-knob-rim)" stroke="#15171A" stroke-width="2" />
+      <line x1="650" y1="64" x2="656" y2="70" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+      <line x1="669" y1="54" x2="672" y2="61" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+      <line x1="699" y1="54" x2="696" y2="61" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+      <line x1="718" y1="64" x2="712" y2="70" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" opacity="0.8" />
+
+      <g transform="translate(684, 98) rotate(45)">
+        <circle cx="0" cy="0" r="26" fill="url(#logo-metallic-dial)" stroke="#111827" stroke-width="1.5" />
+        <circle cx="0" cy="0" r="25" fill="none" stroke="#3A3F47" stroke-width="0.8" opacity="0.4" />
+        <line x1="0" y1="-6" x2="0" y2="-21" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+        <circle cx="0" cy="0" r="5" fill="#1F2937" stroke="#374151" stroke-width="1" />
+      </g>
+      <text x="684" y="152" class="crs-pixel" fill="#9CA3AF" font-size="16" font-weight="bold" text-anchor="middle">CH SELECT</text>
+    </g>
+
+    <g id="logo-knob-vol">
+      <circle cx="684" cy="216" r="32" fill="url(#logo-knob-rim)" stroke="#15171A" stroke-width="2" />
+      <g transform="translate(684, 216) rotate(35)">
+        <circle cx="0" cy="0" r="22" fill="url(#logo-metallic-dial)" stroke="#111827" stroke-width="1.5" />
+        <circle cx="0" cy="0" r="21" fill="none" stroke="#3A3F47" stroke-width="0.8" opacity="0.4" />
+        <line x1="0" y1="-5" x2="0" y2="-18" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" />
+        <circle cx="0" cy="0" r="4" fill="#1F2937" stroke="#374151" stroke-width="1" />
+      </g>
+      <text x="684" y="264" class="crs-pixel" fill="#9CA3AF" font-size="16" font-weight="bold" text-anchor="middle">VOLUME</text>
+    </g>
+
+    <g id="logo-speaker-grille" transform="translate(624, 296)">
+      <rect x="0" y="0" width="120" height="5.5" rx="2.5" fill="#15171A" />
+      <rect x="0" y="12" width="120" height="5.5" rx="2.5" fill="#15171A" />
+      <rect x="0" y="24" width="120" height="5.5" rx="2.5" fill="#15171A" />
+      <rect x="0" y="36" width="120" height="5.5" rx="2.5" fill="#15171A" />
+      <rect x="0" y="48" width="120" height="5.5" rx="2.5" fill="#15171A" />
+      <rect x="0" y="60" width="120" height="5.5" rx="2.5" fill="#15171A" />
+    </g>
+
+    <g id="logo-power-led" transform="translate(684, 384)">
+      <circle cx="0" cy="0" r="5" fill="#111827" stroke="#15171A" stroke-width="1.5" />
+      <circle cx="0" cy="0" r="3" fill="#FFFFFF" filter="url(#logo-glow)" />
+    </g>
+
+    <g id="logo-badge-plate" transform="translate(684, 436)">
+      <rect x="-65" y="-18" width="130" height="28" rx="4" fill="#15171A" stroke="#3A3F47" stroke-width="1" stroke-opacity="0.4" />
+      <text x="0" y="2" class="crs-pixel" fill="#9CA3AF" font-size="16" font-weight="bold" text-anchor="middle">@CATHODERAY</text>
+    </g>
+  </g>
+</svg>`;
+}
+
+export function createFaviconSvg(): string {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'VT323';
+        font-style: normal;
+        font-weight: 400;
+        src: url(data:font/woff2;base64,${VT323_FONT_BASE64}) format('woff2');
+      }
+      .fav-text {
+        font-family: 'VT323', monospace;
+      }
+    </style>
+  </defs>
+
+  <rect x="4" y="10" width="120" height="108" rx="18" fill="#26292E" stroke="#15171A" stroke-width="3" />
+  <rect x="12" y="18" width="82" height="92" rx="10" fill="#15171A" />
+  <rect x="16" y="22" width="74" height="84" rx="8" fill="#0A0E14" />
+  
+  <text x="53" y="78" class="fav-text" fill="#FFFFFF" font-size="44" font-weight="bold" text-anchor="middle" letter-spacing="2">CRS</text>
+  
+  <circle cx="108" cy="38" r="8" fill="#1F2937" stroke="#111827" stroke-width="1.5" />
+  <line x1="108" y1="38" x2="113" y2="33" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
+  
+  <circle cx="108" cy="62" r="7" fill="#1F2937" stroke="#111827" stroke-width="1.5" />
+  <line x1="108" y1="62" x2="112" y2="58" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" />
+  
+  <rect x="100" y="80" width="16" height="2" rx="1" fill="#15171A" />
+  <rect x="100" y="85" width="16" height="2" rx="1" fill="#15171A" />
+  <rect x="100" y="90" width="16" height="2" rx="1" fill="#15171A" />
+  <circle cx="108" cy="102" r="2.5" fill="#FFFFFF" />
+</svg>`;
+}
 
 async function generatePreviews() {
   console.log('[PREVIEW] Generating CathodeRayStats Theme Previews...');
@@ -11,6 +187,8 @@ async function generatePreviews() {
   const previewDir = path.resolve(process.cwd(), 'preview');
   const previewSvgsDir = path.resolve(previewDir, 'svgs');
   const distDir = path.resolve(process.cwd(), 'dist');
+  const assetsDir = path.resolve(process.cwd(), 'assets');
+  const siteDir = path.resolve(process.cwd(), 'site');
 
   if (!fs.existsSync(previewSvgsDir)) {
     fs.mkdirSync(previewSvgsDir, { recursive: true });
@@ -18,6 +196,16 @@ async function generatePreviews() {
   if (!fs.existsSync(distDir)) {
     fs.mkdirSync(distDir, { recursive: true });
   }
+  if (!fs.existsSync(assetsDir)) {
+    fs.mkdirSync(assetsDir, { recursive: true });
+  }
+  if (!fs.existsSync(siteDir)) {
+    fs.mkdirSync(siteDir, { recursive: true });
+  }
+
+  // Generate Logo and Favicon
+  fs.writeFileSync(path.join(assetsDir, 'logo.svg'), createLogoSvg(), 'utf8');
+  fs.writeFileSync(path.join(siteDir, 'favicon.svg'), createFaviconSvg(), 'utf8');
 
   const mockStats = createMockStats('YOUR-NAME');
 
@@ -504,20 +692,20 @@ async function generatePreviews() {
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # Updates every 6 hours
+    - cron: '23 */6 * * *' # Every 6 hours
   workflow_dispatch:      # Allows manual trigger button in Actions tab
 
 permissions:
   contents: write         # Needed to commit updated SVG back to repository
 
 jobs:
-  update-cathoderaystats:
+  cathoderaystats:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Generate CathodeRayStats SVG
+      - name: Update CathodeRayStats
         uses: Cheese-Cheese/CathodeRayStats@v1
         with:
           username: \${{ github.repository_owner }}
@@ -551,6 +739,13 @@ jobs:
     <pre class="code-block" id="embed-code">&lt;p align="center"&gt;
   &lt;img src="./dist/retro-tv.svg" alt="CathodeRayStats Widget" width="650" /&gt;
 &lt;/p&gt;</pre>
+  </div>
+
+  <div style="max-width: 1100px; margin: 1.5rem auto 0; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; font-size: 0.9rem; line-height: 1.6; color: var(--text);">
+    <strong>Advanced (Optional): Match Your Local Timezone</strong>
+    <p style="margin-top: 0.35rem;">
+      By default, the activity heatmap aligns with UTC (<code>timezone-offset-minutes: 0</code>). Pass <code>timezone-offset-minutes</code> in your workflow (e.g. <code>330</code> for IST, <code>-300</code> for EST, <code>-480</code> for PST, <code>540</code> for JST) so the heatmap matches your local calendar day. Look up your offset in minutes with <a href="https://www.worldtimebuddy.com/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">World Time Buddy</a>.
+    </p>
   </div>
 
   <script>

@@ -438,20 +438,20 @@
 
 on:
   schedule:
-    - cron: '0 */6 * * *' # Updates every 6 hours
+    - cron: '23 */6 * * *' # Every 6 hours
   workflow_dispatch:      # Allows manual trigger button in Actions tab
 
 permissions:
   contents: write         # Needed to commit updated SVG back to repository
 
 jobs:
-  update-cathoderaystats:
+  cathoderaystats:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Generate CathodeRayStats SVG
+      - name: Update CathodeRayStats
         uses: Cheese-Cheese/CathodeRayStats@v1
         with:
           username: ${{ github.repository_owner }}
@@ -485,6 +485,13 @@ jobs:
     <pre class="code-block" id="embed-code">&lt;p align="center"&gt;
   &lt;img src="./dist/retro-tv.svg" alt="CathodeRayStats Widget" width="650" /&gt;
 &lt;/p&gt;</pre>
+  </div>
+
+  <div style="max-width: 1100px; margin: 1.5rem auto 0; background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.25rem; font-size: 0.9rem; line-height: 1.6; color: var(--text);">
+    <strong>Advanced (Optional): Match Your Local Timezone</strong>
+    <p style="margin-top: 0.35rem;">
+      By default, the activity heatmap aligns with UTC (<code>timezone-offset-minutes: 0</code>). Pass <code>timezone-offset-minutes</code> in your workflow (e.g. <code>330</code> for IST, <code>-300</code> for EST, <code>-480</code> for PST, <code>540</code> for JST) so the heatmap matches your local calendar day. Look up your offset in minutes with <a href="https://www.worldtimebuddy.com/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: underline;">World Time Buddy</a>.
+    </p>
   </div>
 
   <script>

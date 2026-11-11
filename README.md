@@ -1,10 +1,11 @@
 # CathodeRayStats
 
 <p align="center">
-  <img src="./dist/retro-tv.svg" alt="CathodeRayStats - Retro CRT TV GitHub Stats Widget" width="680" />
+  <img src="./assets/logo.svg" alt="CathodeRayStats Logo" width="200" />
 </p>
 
 <p align="center">
+  <a href="https://cheese-cheese.github.io/CathodeRayStats/"><img src="https://img.shields.io/badge/Live%20Studio-Preview%20%26%20Customize-ff0055?style=for-the-badge&logo=retroarch&logoColor=white" alt="Live Preview Studio" /></a>
   <a href="https://github.com/marketplace/actions/cathoderaystats"><img src="https://img.shields.io/badge/Marketplace-CathodeRayStats-ff7a00?style=for-the-badge&logo=github-actions&logoColor=white" alt="GitHub Marketplace" /></a>
   <a href="https://github.com/features/actions"><img src="https://img.shields.io/badge/Zero--Runtime-Dependency-success?style=for-the-badge" alt="Zero Runtime Dependencies" /></a>
   <a href="https://github.com"><img src="https://img.shields.io/badge/GitHub%20Camo-Compatible-blue?style=for-the-badge" alt="GitHub Camo Proxy Compatible" /></a>
@@ -14,6 +15,10 @@
 **CathodeRayStats** is an animated, zero-runtime-dependency GitHub Action that generates an authentic **Retro CRT Television SVG** displaying your live statistics across **4 cycling channels**.
 
 Self-contained inside a single SVG with embedded `VT323` pixel terminal typography, light analog static noise texture, and pure CSS `@keyframes` animations—fully compatible with GitHub's `camo.githubusercontent.com` image proxy.
+
+<p align="center">
+  <img src="./dist/retro-tv.svg" alt="CathodeRayStats - Retro CRT TV GitHub Stats Widget" width="680" />
+</p>
 
 ---
 
@@ -86,6 +91,19 @@ Add this snippet anywhere in your `README.md`:
 ```
 
 From here on, GitHub Actions will automatically refresh your live stats every 6 hours and push updates to `dist/retro-tv.svg`.
+
+### Advanced (Optional): Match Your Local Timezone
+
+By default, the activity heatmap (Channel 4) aligns with UTC (`timezone-offset-minutes: 0`). If you want the contribution radar to match your local calendar day, pass `timezone-offset-minutes` to your workflow (e.g. `330` for IST, `-300` for EST, `-480` for PST, `540` for JST):
+
+```yaml
+        with:
+          username: ${{ github.repository_owner }}
+          timezone-offset-minutes: 330 # (Optional) UTC offset in minutes
+```
+
+> [!TIP]
+> Need to check your exact timezone offset? You can find your offset in minutes using [World Time Buddy](https://www.worldtimebuddy.com/).
 
 ---
 
@@ -161,7 +179,7 @@ Example custom configuration:
 | `timezone-offset-minutes` | UTC offset in minutes (e.g. `'330'` for IST, `'-300'` for EST) | No | `'0'` |
 | `github-token` | Token used for GraphQL queries | No | `${{ github.token }}` |
 | `commit-and-push` | Automatically commit and push updated SVG within action | No | `'true'` |
-| `commit-message` | Git commit message | No | `'chore: update retro tv profile stats [skip ci]'` |
+| `commit-message` | Git commit message | No | `'chore: update CathodeRayStats [skip ci]'` |
 
 ---
 
